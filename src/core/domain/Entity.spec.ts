@@ -1,10 +1,10 @@
-import { expect } from "chai";
-import { Entity } from "./Entity";
-import { DomainError } from "./errors/DomainError";
+import { expect } from 'chai'
+import { Entity } from './Entity'
+import { DomainError } from './errors/DomainError'
 
 interface TestEntityProps {}
 class TestDomainError extends DomainError {
-  constructor(){
+  constructor () {
     super({
       message: 'test error',
       context: 'Test',
@@ -14,60 +14,60 @@ class TestDomainError extends DomainError {
 }
 
 class TestEntity extends Entity<TestEntityProps> {
-  static create() {
+  static create () {
     return new TestEntity({})
   }
 
-  forceError() {
+  forceError () {
     this.includeNewError(new TestDomainError())
   }
-} 
+}
 
 export const TEntity = () => {
-  it('should be false case first TestEntity not is equal second TestEntity', () => {
-    const testEntityFirst =  TestEntity.create();
-    const testEntitySecond =  TestEntity.create();
+  it('should be false case first TestEntity not is equal second TestEntity', function () {
+    const testEntityFirst = TestEntity.create()
+    const testEntitySecond = TestEntity.create()
 
     expect(testEntityFirst.equals(testEntitySecond)).to.be.equal(false)
   })
 
-  it('should be false case second TestEntity is undefined', () => {
-    const testEntityFirst =  TestEntity.create();
-    const testEntitySecond =  undefined;
+  it('should be false case second TestEntity is undefined', function () {
+    const testEntityFirst = TestEntity.create()
+    const testEntitySecond = undefined
 
     expect(testEntityFirst.equals(testEntitySecond)).to.be.equal(false)
   })
 
-  it('should be false case second TestEntity not is entity', () => {
-    const testEntityFirst =  TestEntity.create();
-    const testEntitySecond =  { id: '546541354' };
+  it('should be false case second TestEntity not is entity', function () {
+    const testEntityFirst = TestEntity.create()
+    const testEntitySecond = { id: '546541354' }
 
     // @ts-ignore
     expect(testEntityFirst.equals(testEntitySecond)).to.be.equal(false)
   })
 
-  it('should be true case second TestEntity is equal the first', () => {
-    const testEntityFirst =  TestEntity.create();
-    const testEntitySecond =  testEntityFirst;
+  it('should be true case second TestEntity is equal the first', function () {
+    const testEntityFirst = TestEntity.create()
+    const testEntitySecond = testEntityFirst
 
     expect(testEntityFirst.equals(testEntitySecond)).to.be.equal(true)
   })
 
-  it('should be included one domain error in entity', () => {
-    const testEntity =  TestEntity.create();
+  it('should be included one domain error in entity', function () {
+    const testEntity = TestEntity.create()
     testEntity.forceError()
 
     expect(testEntity.errors).to.length(1)
   })
 
-  it('should not be valid if it contains errors', () => {
-    const testEntity =  TestEntity.create();
+  it('should not be valid if it contains errors', function () {
+    const testEntity = TestEntity.create()
     testEntity.forceError()
     expect(testEntity.isValid()).to.be.equal(false)
   })
 
-  it('should be valid if it does not contain errors', () => {
-    const testEntity =  TestEntity.create();
+  it('should be valid if it does not contain errors', function () {
+    const testEntity = TestEntity.create()
     testEntity.forceError()
     expect(testEntity.isValid()).to.be.equal(false)
   })

@@ -1,12 +1,12 @@
-import { ItemRepositoryInMemory } from "@modules/stock/repositories/inMemory/ItemRepositoryInMemory";
-import { StockRepositoryInMemory } from "@modules/stock/repositories/inMemory/StockRepositoryInMemory";
-import { expect } from "chai"
-import { CreateStockUseCase as UseCase } from "./CreateStockUseCase"
+import { ItemRepositoryInMemory } from '@modules/stock/repositories/inMemory/ItemRepositoryInMemory'
+import { StockRepositoryInMemory } from '@modules/stock/repositories/inMemory/StockRepositoryInMemory'
+import { expect } from 'chai'
+import { CreateStockUseCase as UseCase } from './CreateStockUseCase'
 
-export const CreateStockUseCase = () => {
-  let useCase: UseCase;
+export function CreateStockUseCase () {
+  let useCase: UseCase
 
-  it('should be create a new stock', async () => {
+  it('should be create a new stock', async function () {
     const response = await useCase.execute({
       name: 'Office',
       branch: 'São Paulo - SP'
@@ -15,7 +15,7 @@ export const CreateStockUseCase = () => {
     expect(response.value).to.be.contains({ message: 'Stock saved successfully' })
   })
 
-  it('should not be create a stock duplicated', async () => {
+  it('should not be create a stock duplicated', async function () {
     const request = {
       name: 'Office',
       branch: 'São Paulo - SP'
@@ -27,7 +27,7 @@ export const CreateStockUseCase = () => {
     expect(response.value).to.be.contains({ message: 'Stock already exists' })
   })
 
-  beforeEach(() => {
+  beforeEach(function () {
     const itemRepository = new ItemRepositoryInMemory()
     const stockRepository = new StockRepositoryInMemory(itemRepository)
     useCase = new UseCase(stockRepository)

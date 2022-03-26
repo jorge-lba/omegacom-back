@@ -1,7 +1,7 @@
-import { UseCaseError } from "@core/domain/errors/UseCaseError";
+import { UseCaseError } from '@core/domain/errors/UseCaseError'
 
 export class StockNotFound extends UseCaseError {
-  constructor(){
+  constructor () {
     super('Stock not found')
   }
 }

@@ -1,23 +1,23 @@
 
-import { AggregateRoot } from "@core/domain/AggregateRoot"
-import { FailToCreateError } from "@core/shared/errors/FailToCreateError"
-import { InsufficientQuantityError } from "./errors/InsufficientQuantityError"
+import { AggregateRoot } from '@core/domain/AggregateRoot'
+import { FailToCreateError } from '@core/shared/errors/FailToCreateError'
+import { InsufficientQuantityError } from './errors/InsufficientQuantityError'
 
-class Item extends AggregateRoot<ItemProps>{
+class Item extends AggregateRoot<ItemProps> {
   get quantity () {
     return this._props.quantity
   }
 
-  get name() {
+  get name () {
     return this._props.name
   }
 
-  static create({
+  static create ({
     name,
     quantity,
     description
-  }: CreateItemProps, id?: string): Item | FailToCreateError{
-    if(!name.trim()) return new FailToCreateError('Item')
+  }: CreateItemProps, id?: string): Item | FailToCreateError {
+    if (!name.trim()) return new FailToCreateError('Item')
 
     return new Item({
       name,
@@ -26,12 +26,12 @@ class Item extends AggregateRoot<ItemProps>{
     }, id)
   }
 
-  addQuantity(quantity: number){
+  addQuantity (quantity: number) {
     this._props.quantity += quantity
   }
 
-  removeQuantity(quantity: number): void {
-    if(this._props.quantity < quantity)  {
+  removeQuantity (quantity: number): void {
+    if (this._props.quantity < quantity) {
       const error = new InsufficientQuantityError(this)
       this.includeNewError(error)
       return

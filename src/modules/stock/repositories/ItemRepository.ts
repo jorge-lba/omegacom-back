@@ -1,4 +1,4 @@
-import { Item } from "../domain/Item";
+import { Item } from '../domain/Item'
 
 export interface ItemRepository {
   exists(id: string): Promise<boolean>;

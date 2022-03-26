@@ -1,56 +1,56 @@
-import { expect } from 'chai';
+import { expect } from 'chai'
 import faker from 'community-faker'
-import { InsufficientQuantityError } from '../errors/InsufficientQuantityError';
+import { InsufficientQuantityError } from '../errors/InsufficientQuantityError'
 
-import { Item } from '../Item';
+import { Item } from '../Item'
 
-export const ItemEntity = () => {
-  it('should be create a new instance', ()=> {
+export function ItemEntity () {
+  it('should be create a new instance', function () {
     const data = {
       name: faker.commerce.productName(),
       quantity: faker.datatype.number(50),
       description: faker.commerce.productDescription()
-    }; 
+    }
 
-    const item = Item.create(data)  as Item
+    const item = Item.create(data) as Item
 
-    expect(item.id).to.an('string');
+    expect(item.id).to.an('string')
     expect(item.props).to.include(data)
   })
 
-  it('should be sum quantity', () => {
+  it('should be sum quantity', function () {
     const data = {
       name: faker.commerce.productName(),
       quantity: 50,
       description: faker.commerce.productDescription()
-    }; 
+    }
 
-    const item = Item.create(data)  as Item
+    const item = Item.create(data) as Item
     item.addQuantity(50)
 
     expect(item.props.quantity).to.equal(100)
   })
 
-  it('should be sub quantity', () => {
+  it('should be sub quantity', function () {
     const data = {
       name: faker.commerce.productName(),
       quantity: 50,
       description: faker.commerce.productDescription()
-    }; 
+    }
 
-    const item = Item.create(data)  as Item
+    const item = Item.create(data) as Item
     item.removeQuantity(25)
 
     expect(item.props.quantity).to.equal(25)
   })
 
-  it('should return an error when removing an amount and the total is negative', () => {
+  it('should return an error when removing an amount and the total is negative', function () {
     const data = {
       name: 'Item Name',
-      quantity: 20,
-    }; 
+      quantity: 20
+    }
 
-    const item = Item.create(data)  as Item
+    const item = Item.create(data) as Item
     item.removeQuantity(25)
     const errors = item.errors
     const errorValue = errors.values().next().value

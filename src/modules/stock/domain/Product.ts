@@ -1,7 +1,7 @@
-import { Entity } from "@core/domain/Entity"
+import { Entity } from '@core/domain/Entity'
 
 class Product extends Entity<ProductProps> {
-  static create(props: CreateProductProps, id?: string){
+  static create (props: CreateProductProps, id?: string) {
     return new Product({
       ...props,
       composition: props.composition || [],
@@ -10,7 +10,7 @@ class Product extends Entity<ProductProps> {
     }, id)
   }
 
-  addItemInComposition(itemId: string, quantity: number) {
+  addItemInComposition (itemId: string, quantity: number) {
     this._props.composition.push({
       itemId,
       quantity
@@ -34,6 +34,5 @@ interface Composition {
   itemId: string,
   quantity: number
 }
-
 
 export { Product, CreateProductProps }

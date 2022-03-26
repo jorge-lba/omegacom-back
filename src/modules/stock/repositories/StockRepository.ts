@@ -1,4 +1,4 @@
-import { Stock } from "../domain/Stock";
+import { Stock } from '../domain/Stock'
 
 export interface StockRepository {
   exists(props: ExistsProps): Promise<boolean>;
