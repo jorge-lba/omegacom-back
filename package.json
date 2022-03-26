@@ -1,22 +1,29 @@
 {
   "name": "omegacom",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/",
   "author": "Jorge Alegretti <jorgeluiz.b.alegretti@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register '**/*.spec.ts'",
-    "test:watch": " mocha -r ts-node/register --watch --watch-files src/**/*.ts, src/*.ts ./src/__tests/mocha.spec.ts  --reporter mocha-clearscreen-reporter"
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register -r tsconfig-paths/register '**/*.spec.ts'",
+    "test:watch": " mocha -r ts-node/register -r tsconfig-paths/register --watch --watch-files src/**/*.ts, src/*.ts ./src/tests/mocha.spec.ts  --reporter mocha-clearscreen-reporter",
+    "test:coverage": "nyc yarn test",
+    "start:dev": "tsnd src/"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.1.0",
     "@types/node": "^17.0.21",
     "chai": "^4.3.6",
+    "community-faker": "^5.5.5",
     "mocha": "^9.2.1",
     "mocha-clearscreen-reporter": "^1.0.1",
+    "nyc": "^15.1.0",
+    "source-map-support": "^0.5.21",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.14.0",
     "typescript": "^4.6.2"
   }
 }
