@@ -26,7 +26,7 @@ export class Stock extends AggregateRoot<StockProps> {
   }
 
   checkThePossibilityOfProducing (quantity: number, product: Product) {
-    const itIsPossible = product.props.composition.reduce((acc, cur) => {
+    return product.props.composition.reduce((acc, cur) => {
       const item = this.props.items.get(cur.itemId)
       if (!item) {
         acc = false
@@ -34,8 +34,6 @@ export class Stock extends AggregateRoot<StockProps> {
       }
       return (item?.quantity >= (cur.quantity * quantity)) && acc
     }, true)
-
-    return itIsPossible
   }
 
   get items () {
