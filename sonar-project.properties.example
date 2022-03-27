@@ -1,0 +1,17 @@
+sonar.projectKey=OmegaCom
+sonar.projectName=OmegaCom
+sonar.login=include sonar token
+sonar.projectVersion=0.1
+
+sonar.host.url=http://localhost:9000
+sonar.sourceEncoding=UTF-8
+sonar.verbose=true
+
+sonar.sources=src
+
+sonar.tests=src
+sonar.test.inclusions=**/src/**/*.spec.ts
+
+sonar.junit.reportsPath=junit.xml
+sonar.javascript.lcov.reportPaths=**/coverage/lcov.info
+sonar.typescript.lcov.reportPaths=**/coverage/lcov.info

@@ -8,7 +8,8 @@
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register -r tsconfig-paths/register '**/*.spec.ts'",
     "test:watch": " mocha -r ts-node/register -r tsconfig-paths/register --watch --watch-files src/**/*.ts, src/*.ts ./src/tests/mocha.spec.ts  --reporter mocha-clearscreen-reporter",
     "test:coverage": "nyc yarn test",
-    "start:dev": "tsnd src/"
+    "start:dev": "tsnd src/",
+    "sonar:scanner": "export PATH=$PATH:/home/$USER/sonar-scanner/bin && sonar-scanner"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
