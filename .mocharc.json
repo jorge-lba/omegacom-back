@@ -1,0 +1,20 @@
+{
+	"spec": "**/*.spec.ts",
+	"require":  ["ts-node/register", "tsconfig-paths/register"],
+	"extension": ["ts"],
+	"inline-diffs ": true,
+	"full-trace": true,
+	"recursive": true,
+	"diff": true,
+	"exit": true,
+	"slow": 300,
+	"retries": 3,
+	"timeout": 0,
+	"ignore": [
+    "node_modules", 
+    "dist", 
+    "seeds", 
+    ".devcontainer", 
+    ".vscode"
+  ]
+}
