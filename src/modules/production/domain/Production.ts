@@ -4,8 +4,8 @@ import { InvalidDeliveryDateError } from './errors/InvalidDeliveryDateError'
 import { StartProductionEvent } from './events/StartProductionEvent'
 
 export class Production extends AggregateRoot<ProductionProps> {
-  start () {
-    this.addDomainEvent(new StartProductionEvent(this))
+  get startAt () {
+    return this.props.startAt
   }
 
   static create (props: CreateProductionProps): Either<Error, Production> {
@@ -17,6 +17,11 @@ export class Production extends AggregateRoot<ProductionProps> {
       items: new Map(),
       deliveryDate: deliveryDate.value
     }))
+  }
+
+  start () {
+    this._props.startAt = new Date()
+    this.addDomainEvent(new StartProductionEvent(this))
   }
 
   private static validateDeliveryDate (date: Date): Either<Error, Date> {
@@ -41,6 +46,7 @@ export class Production extends AggregateRoot<ProductionProps> {
 interface ProductionProps {
   serial?: number
   deliveryDate: Date
+  startAt?: Date
   items?: Map<number, ProductsToProduction>
 }
 
