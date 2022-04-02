@@ -7,9 +7,10 @@
   "scripts": {
     "test": "mocha",
     "test:watch": "mocha --config=.mocharc.watch.json",
-    "test:coverage": "nyc yarn test",
-    "sonar:scanner": "yarn test:coverage --config=.mocharc.sonar.json && sonar-scanner",
-    "start:dev": "tsnd src/"
+    "test:coverage": "nyc npm test",
+    "sonar:scanner": "npm run test:coverage --config=.mocharc.sonar.json && export $(cat .env | xargs) && sonar-scanner",
+    "start:dev": "tsnd src/",
+		"run:action": "act --secret-file .env"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",

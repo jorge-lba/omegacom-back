@@ -8,5 +8,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '17'
-      - run: npm install
-      - run: npm test
+      - name: Install Dependencies
+        run: npm install
+      - name: Validate Lint
+        run: npx eslint "src/**" 
+      - name: Run Tests
+        run: npm test
