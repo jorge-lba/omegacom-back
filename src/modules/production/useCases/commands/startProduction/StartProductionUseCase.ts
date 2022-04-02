@@ -1,9 +1,12 @@
 import { UseCase } from '@core/domain/UseCase'
 import { Either, left, right } from '@core/shared/logic/Either'
 import { Production } from '@modules/production/domain/Production'
+import { ProductionRepository } from '@modules/production/repositories/ProductionRepository'
 import { DoesNotContainItemsForProductionError } from '../../errors/DoesNotContainItemsForProductionError'
 
 class StartProductionUseCase implements UseCase<RequestStartProduction, ResponseStartProduction> {
+  constructor (private productionRepository: ProductionRepository) {}
+
   async execute (request?: RequestStartProduction): Promise<ResponseStartProduction> {
     if (!request?.items || request.items.length <= 0) {
       return left(
@@ -28,6 +31,8 @@ class StartProductionUseCase implements UseCase<RequestStartProduction, Response
     )
 
     production.start()
+
+    this.productionRepository.save(production)
 
     return right({
       message: 'Production started successfully'
